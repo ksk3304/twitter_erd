@@ -20,13 +20,6 @@
   created_at { label: "datatime, not null"}
   updated_at { label: "datatime, not null"}
 
-[users_follows]
-  *id {label: "bigint, not null, uniq"}
-  user_id {label: "bigint, not null"}
-  follow_id {label: "bigint, not null"}
-  created_at { label: "datatime, not null"}
-  updated_at { label: "datatime, not null"}
-
 [tweets]
   *id {label: "bigint, not null, uniq"}
   user_id {label: "bigint, not null, FK(users)"}
@@ -57,9 +50,9 @@
 
 [direct_messages]
   *id {label: "bigint, not null, uniq"}
-  user_sender_id {label: "bigint, not null, FK(users)"}
-  user_receiver_id {label: "bigint, not null, FK(users)"}
-  message {label: "varchar, not null"}
+  sender_id {label: "bigint, not null, FK(users)"}
+  receiver_id {label: "bigint, not null, FK(users)"}
+  content {label: "varchar, not null"}
   created_at { label: "datatime, not null"}
   updated_at { label: "datatime, not null"}
 
@@ -79,8 +72,7 @@
 # 0 or more      *
 # 1 or more      +
 users 1--* tweets
-users 1--* users_follows
-follows 1--* users_follows
+users 1--* follows
 users 1--* favorites
 tweets 1--* favorites
 users 1--* retweets
